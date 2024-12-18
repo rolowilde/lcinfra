@@ -1,0 +1,7 @@
+{
+    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "files.associations": {
+        "**/crontab": "crontab",
+        "**/proxy/locations/**/*": "nginx"
+    }
+}

@@ -1,0 +1,11 @@
+---
+- name: Ensure infra repo path
+  ansible.builtin.file:
+    path: "{{ lcinfra_repo_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Clone infra repo
+  ansible.builtin.git: # noqa: latest
+    repo: "{{ lcinfra_repo_url }}"
+    dest: "{{ lcinfra_repo_path }}"

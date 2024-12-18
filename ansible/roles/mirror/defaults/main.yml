@@ -1,0 +1,3 @@
+---
+mirror_project_src: "{{ lcinfra_docker_path }}/mirror"
+mirror_root: /var/mirror

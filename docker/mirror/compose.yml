@@ -1,0 +1,9 @@
+services:
+  archlinux:
+    build: .
+    volumes:
+      - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
+      - ./archlinux/sync:/sync:Z
+    environment:
+      - TZ=${LCINFRA_TIMEZONE}
+    restart: unless-stopped

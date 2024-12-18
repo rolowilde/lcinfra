@@ -1,0 +1,7 @@
+---
+- name: Provision a LinuxCentrs.lv server
+  hosts: lc
+  become: true
+  roles:
+    - { role: mirror, tags: mirror }
+    - { role: proxy, tags: proxy }

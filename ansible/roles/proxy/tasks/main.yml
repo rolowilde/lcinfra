@@ -1,0 +1,13 @@
+---
+- name: Get host timezone
+  ansible.builtin.command:
+    cmd: timedatectl show -p Timezone --value
+  register: tdctl_tz
+  changed_when: tdctl_tz.rc != 0
+
+- name: Run docker-compose project
+  community.docker.docker_compose_v2:
+    project_src: "{{ proxy_project_src }}"
+    state: present
+  environment:
+    LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
