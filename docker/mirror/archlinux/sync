@@ -27,10 +27,10 @@
 # lot of traffic.
 
 # Directory where the repo is stored locally. Example: /srv/repo
-target="/mirror/archlinux"
+target="/mirror"
 
 # Lockfile path
-lock="/tmp/syncrepo-archlinux.lck"
+lock="/tmp/sync.lck"
 
 # If you want to limit the bandwidth used by rsync set this.
 # Use 0 to disable the limit.
@@ -87,12 +87,6 @@ if ! tty -s && [[ -f "$target/lastupdate" ]] && diff -b <(curl -Ls "$lastupdate_
 fi
 
 rsync_cmd \
-        --exclude='*.links.tar.gz*' \
-        --exclude='/other' \
-        --exclude='/sources' \
-    --exclude='/*debug/' \
-    --exclude='/pool/packages-debug' \
-    --exclude='/archive' \
         "${source_url}" \
         "${target}"
 
