@@ -18,9 +18,13 @@
     LCINFRA_LETSENCRYPT: "{{ proxy_letsencrypt }}"
     LCINFRA_DHPARAM: "{{ proxy_dhparam }}"
 
-- name: Copy crontab
-  ansible.builtin.copy:
-    remote_src: true
-    src: "{{ proxy_project_src }}/crontab"
-    dest: "/etc/cron.d/docker-proxy"
-    mode: '0644'
+- name: Schedule a certbot renewal every 12 hours
+  ansible.builtin.cron:
+    name: certbot renewal
+    cron_file: docker-proxy-certbot
+    user: root
+    hour: '*/12'
+    job: >-
+      docker compose -p proxy run --rm certbot &&
+      docker compose -p proxy exec web nginx -s reload
+    state: present

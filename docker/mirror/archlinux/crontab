@@ -1,1 +1,0 @@
-16 * * * * root docker compose -p mirror exec archlinux bash /sync

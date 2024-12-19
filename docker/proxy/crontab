@@ -1,2 +1,0 @@
-0 */12 * * * root docker compose -p proxy run --rm certbot
-1 */12 * * * root docker compose -p proxy exec web nginx -s reload
