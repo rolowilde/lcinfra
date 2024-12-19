@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: ../Dockerfile.nginx
-      target: mirror
-    image: nginx-mirror:latest
+      target: fancyindex
+    image: nginx:fancyindex
     hostname: root.mirror
     volumes:
       - ${LCINFRA_MIRROR_ROOT}:/mirror:z,ro
@@ -22,8 +22,8 @@ services:
     build:
       context: .
       dockerfile: ../Dockerfile.nginx
-      target: mirror
-    image: nginx-mirror:latest
+      target: fancyindex-rsync
+    image: nginx:fancyindex-rsync
     hostname: archlinux.mirror
     volumes:
       - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z

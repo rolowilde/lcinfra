@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: ../Dockerfile.nginx
-      target: proxy
-    image: nginx-proxy:latest
+      target: ssl
+    image: nginx:ssl
     ports:
       - 80:80
       - 443:443
