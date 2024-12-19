@@ -3,7 +3,7 @@ services:
     build: .
     volumes:
       - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
-      - ./archlinux/sync:/sync:Z
+      - ./archlinux/sync:/sync:ro
     environment:
       - TZ=${LCINFRA_TIMEZONE}
     healthcheck:
