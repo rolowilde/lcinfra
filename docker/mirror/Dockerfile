@@ -9,9 +9,6 @@ RUN apt-get update && \
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-VOLUME /mirror
-VOLUME /syncrepo
-
 EXPOSE 80
 
 STOPSIGNAL SIGQUIT

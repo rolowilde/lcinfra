@@ -9,11 +9,6 @@ RUN apt-get update && \
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-VOLUME /etc/letsencrypt
-VOLUME /var/www/html
-VOLUME /etc/nginx/conf.d
-VOLUME /etc/nginx/locations
-
 EXPOSE 80
 EXPOSE 443
 
