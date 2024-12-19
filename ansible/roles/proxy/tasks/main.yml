@@ -1,4 +1,8 @@
 ---
+- name: Generate Diffie-Hellman parameters with the default size (4096 bits)
+  community.crypto.openssl_dhparam:
+    path: "{{ proxy_dhparam }}"
+
 - name: Get host timezone
   ansible.builtin.command:
     cmd: timedatectl show -p Timezone --value
@@ -11,6 +15,7 @@
     state: present
   environment:
     LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
+    LCINFRA_LETSENCRYPT: "{{ proxy_letsencrypt }}"
 
 - name: Copy crontab
   ansible.builtin.copy:

@@ -25,8 +25,8 @@ services:
     image: certbot/certbot:latest
     command: renew
     volumes:
-      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/etc/letsencrypt:z
-      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/var/lib/letsencrypt:z
+      - ${LCINFRA_LETSENCRYPT}:/etc/letsencrypt:z
+      - ${LCINFRA_LETSENCRYPT}:/var/lib/letsencrypt:z
 
 networks:
   mirrors:
