@@ -1,0 +1,4 @@
+---
+mirror_root: # path to root directory of mirrors
+proxy_letsencrypt: # path to letsencrypt directory
+proxy_dhparam: # path to dhparams file
