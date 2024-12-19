@@ -14,8 +14,8 @@ VOLUME /var/www/html
 VOLUME /etc/nginx/conf.d
 VOLUME /etc/nginx/locations
 
-EXPOSE 80/tcp
-EXPOSE 443/tcp
+EXPOSE 80
+EXPOSE 443
 
 STOPSIGNAL SIGQUIT
 
