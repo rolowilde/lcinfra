@@ -16,6 +16,7 @@
   environment:
     LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
     LCINFRA_LETSENCRYPT: "{{ proxy_letsencrypt }}"
+    LCINFRA_DHPARAM: "{{ proxy_dhparam }}"
 
 - name: Copy crontab
   ansible.builtin.copy:
