@@ -4,7 +4,7 @@ services:
     image: nginx-mirror:latest
     volumes:
       - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
-      - ./archlinux/sync:/sync:ro
+      - ./archlinux/sync:/sync:Z,ro
     environment:
       - TZ=${LCINFRA_TIMEZONE}
     healthcheck:
