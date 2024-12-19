@@ -7,6 +7,8 @@ services:
     volumes:
       - ${LCINFRA_LETSENCRYPT}:/etc/letsencrypt:ro
       - ${LCINFRA_DHPARAM}:/etc/nginx/dhparam.pem:ro
+      - ./conf.d:/etc/nginx/conf.d:ro
+      - ./locations:/etc/nginx/locations:ro
     environment:
       - TZ=${LCINFRA_TIMEZONE}
     healthcheck:
@@ -23,8 +25,8 @@ services:
     image: certbot/certbot:latest
     command: renew
     volumes:
-      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/etc/letsencrypt
-      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/var/lib/letsencrypt
+      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/etc/letsencrypt:z
+      - ${LCINFRA_LETSENCRYPT:-letsencrypt}:/var/lib/letsencrypt:z
 
 networks:
   mirrors:
