@@ -11,3 +11,10 @@
     state: present
   environment:
     LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
+
+- name: Copy crontab
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ proxy_project_src }}/crontab"
+    dest: "/etc/cron.d/docker-proxy"
+    mode: '0644'
