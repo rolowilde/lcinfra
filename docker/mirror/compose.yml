@@ -1,4 +1,19 @@
 services:
+  root:
+    build: .
+    image: nginx-mirror:latest
+    volumes:
+      - ${LCINFRA_MIRROR_ROOT}:/mirror:z,ro
+    environment:
+      - TZ=${LCINFRA_TIMEZONE}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
   archlinux:
     build: .
     image: nginx-mirror:latest
