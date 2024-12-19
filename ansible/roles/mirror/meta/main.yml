@@ -2,3 +2,4 @@
 dependencies:
   - lcinfra
   - geerlingguy.docker
+  - robertdebock.cron
