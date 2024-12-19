@@ -27,7 +27,8 @@
 
 - name: Copy crontab for each mirror
   ansible.builtin.copy:
-    remote_src: "{{ mirror_project_src }}/{{ item.path }}/crontab"
+    remote_src: true
+    src: "{{ mirror_project_src }}/{{ item.path }}/crontab"
     dest: "/etc/cron.d/docker-mirror-{{ item.path }}"
     mode: '0644'
   loop: "{{ found_mirror_dirs.files }}"
