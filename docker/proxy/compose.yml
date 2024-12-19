@@ -1,6 +1,9 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ../Dockerfile.nginx
+      target: proxy
     image: nginx-proxy:latest
     ports:
       - 80:80

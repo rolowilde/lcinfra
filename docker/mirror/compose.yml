@@ -1,6 +1,9 @@
 services:
   root:
-    build: .
+    build:
+      context: .
+      dockerfile: ../Dockerfile.nginx
+      target: mirror
     image: nginx-mirror:latest
     hostname: root.mirror
     volumes:
@@ -16,7 +19,10 @@ services:
     restart: unless-stopped
 
   archlinux:
-    build: .
+    build:
+      context: .
+      dockerfile: ../Dockerfile.nginx
+      target: mirror
     image: nginx-mirror:latest
     hostname: archlinux.mirror
     volumes:
