@@ -6,4 +6,10 @@ services:
       - ./archlinux/sync:/sync:Z
     environment:
       - TZ=${LCINFRA_TIMEZONE}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     restart: unless-stopped
