@@ -8,3 +8,4 @@ roles:
   - name: geerlingguy.docker
   - name: geerlingguy.git
   - name: robertdebock.cron
+  - name: artis3n.tailscale
