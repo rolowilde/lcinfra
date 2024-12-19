@@ -2,6 +2,7 @@ services:
   root:
     build: .
     image: nginx-mirror:latest
+    hostname: root.mirror
     volumes:
       - ${LCINFRA_MIRROR_ROOT}:/mirror:z,ro
     environment:
@@ -17,6 +18,7 @@ services:
   archlinux:
     build: .
     image: nginx-mirror:latest
+    hostname: archlinux.mirror
     volumes:
       - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
       - ./archlinux/sync:/sync:Z,ro
