@@ -1,3 +1,4 @@
 ansible/inventory.yml
 docker/proxy/conf.d/*
 !docker/proxy/conf.d/.gitkeep
+.env
