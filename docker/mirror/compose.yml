@@ -13,3 +13,8 @@ services:
       retries: 3
       start_period: 10s
     restart: unless-stopped
+
+networks:
+  default:
+    name: mirror_backend_net
+    driver: bridge
