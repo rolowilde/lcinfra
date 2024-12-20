@@ -11,20 +11,12 @@
     state: directory
     mode: '0755'
 
-- name: Copy nginx.conf
+- name: Copy files
   ansible.builtin.copy:
-    src: nginx.conf
-    dest: "{{ mirror_project_src }}/nginx.conf"
+    src: ./
+    dest: "{{ mirror_project_src }}"
+    directory_mode: '0755'
     mode: '0644'
-
-- name: Copy repo sync scripts
-  ansible.builtin.copy:
-    src: "sync-{{ mirror }}.sh"
-    dest: "{{ mirror_project_src }}/sync-{{ mirror }}.sh"
-    mode: '0644'
-  loop: "{{ mirror_list }}"
-  loop_control:
-    loop_var: mirror
 
 - name: Get host timezone
   ansible.builtin.command:

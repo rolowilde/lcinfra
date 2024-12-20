@@ -5,22 +5,11 @@
     state: directory
     mode: '0755'
 
-- name: Ensure conf.d directory
-  ansible.builtin.file:
-    path: "{{ proxy_project_src }}/conf.d"
-    state: directory
-    mode: '0755'
-
-- name: Copy conf.d files
+- name: Copy files
   ansible.builtin.copy:
-    src: conf.d/
-    dest: "{{ proxy_project_src }}/conf.d"
-    mode: '0644'
-
-- name: Copy nginx.conf
-  ansible.builtin.copy:
-    src: nginx.conf
-    dest: "{{ proxy_project_src }}/nginx.conf"
+    src: ./
+    dest: "{{ proxy_project_src }}"
+    directory_mode: '0755'
     mode: '0644'
 
 - name: Generate Diffie-Hellman parameters with the default size (4096 bits)
