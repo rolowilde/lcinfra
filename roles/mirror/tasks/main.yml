@@ -46,8 +46,8 @@
 
 - name: Schedule a sync for each mirror every random minute
   ansible.builtin.cron:
-    name: repo sync
-    cron_file: "docker-mirror-{{ mirror }}"
+    name: "{{ mirror }} repo sync"
+    cron_file: docker-mirror-sync
     user: root
     minute: "{{ 60 | random }}"
     job: docker compose --project-directory {{ mirror_project_src }} exec {{ mirror }} bash /sync
