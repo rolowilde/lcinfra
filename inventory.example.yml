@@ -2,9 +2,9 @@
 lc:
   hosts:
     host:
-      ansible_host:
-      mirror_root: # path to root directory of mirrors
-      proxy_letsencrypt: # path to letsencrypt directory
-      proxy_dhparam: # path to dhparams file
   vars:
+    mirror_root: # path to root directory of mirrors
+    proxy_letsencrypt: # path to letsencrypt directory
+    proxy_dhparam: # path to dhparams file
     tailscale_authkey: # authkey for all hosts in this group
+    firewall: # https://github.com/linux-system-roles/firewall#examples-of-options
