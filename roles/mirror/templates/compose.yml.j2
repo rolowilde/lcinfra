@@ -28,7 +28,7 @@ services:
     hostname: {{ mirror }}.mirror
     volumes:
       - {{ mirror_root }}/{{ mirror }}:/mirror:Z
-      - ./{{ mirror }}-sync.sh:/sync:Z,ro
+      - ./sync-{{ mirror }}.sh:/sync:Z,ro
     environment:
       - TZ={{ tdctl_tz.stdout }}
     healthcheck:
