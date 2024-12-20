@@ -1,0 +1,11 @@
+---
+- name: Install tuned
+  ansible.builtin.package:
+    name: tuned
+    state: present
+
+- name: Enable and start tuned.service
+  ansible.builtin.service:
+    name: tuned
+    enabled: true
+    state: started

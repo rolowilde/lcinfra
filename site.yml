@@ -3,6 +3,7 @@
   hosts: lc
   become: true
   roles:
+    - { role: tuned, tags: tuned }
     - { role: artis3n.tailscale, tags: tailscale }
     - { role: linux-system-roles.firewall, tags: firewall }
     - { role: mirror, tags: mirror }
