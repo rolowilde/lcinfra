@@ -7,7 +7,9 @@ services:
     image: nginx:fancyindex
     hostname: root.mirror
     volumes:
-      - ${LCINFRA_MIRROR_ROOT}:/mirror:z,ro
+      - {{ mirror_root }}:/mirror:z,ro
+    environment:
+      - TZ={{ tdctl_tz.stdout }}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -15,17 +17,20 @@ services:
       retries: 3
       start_period: 10s
     restart: unless-stopped
+{% for mirror in mirror_list %}
 
-  archlinux:
+  {{ mirror }}:
     build:
       context: .
       dockerfile: ../Dockerfile.nginx
       target: fancyindex-rsync
     image: nginx:fancyindex-rsync
-    hostname: archlinux.mirror
+    hostname: {{ mirror }}.mirror
     volumes:
-      - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
-      - ./archlinux/sync:/sync:Z,ro
+      - {{ mirror_root }}/{{ mirror }}:/mirror:Z
+      - ./{{ mirror }}-sync.sh:/sync:Z,ro
+    environment:
+      - TZ={{ tdctl_tz.stdout }}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -37,6 +42,7 @@ services:
         soft: 262144
         hard: 262144
     restart: unless-stopped
+{% endfor %}
 
 networks:
   default:

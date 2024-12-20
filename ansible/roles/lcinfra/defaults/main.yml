@@ -1,4 +1,0 @@
----
-lcinfra_repo_url: https://github.com/rowlul/lcinfra.git
-lcinfra_repo_path: /srv/infra
-lcinfra_docker_path: "{{ lcinfra_repo_path }}/docker"

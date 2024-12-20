@@ -1,4 +1,28 @@
 ---
+- name: Ensure proxy compose directory
+  ansible.builtin.file:
+    path: "{{ proxy_project_src }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure conf.d directory
+  ansible.builtin.file:
+    path: "{{ proxy_project_src }}/conf.d"
+    state: directory
+    mode: '0755'
+
+- name: Copy conf.d files
+  ansible.builtin.copy:
+    src: conf.d/
+    dest: "{{ proxy_project_src }}/conf.d"
+    mode: '0644'
+
+- name: Copy nginx.conf
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: "{{ proxy_project_src }}/nginx.conf"
+    mode: '0644'
+
 - name: Generate Diffie-Hellman parameters with the default size (4096 bits)
   community.crypto.openssl_dhparam:
     path: "{{ proxy_dhparam }}"
@@ -9,18 +33,16 @@
   register: tdctl_tz
   changed_when: tdctl_tz.rc != 0
 
-- name: Create .env file
-  ansible.builtin.copy:
-    dest: "{{ proxy_project_src }}/.env"
-    mode: '0400'
-    content: |
-      TZ={{ tdctl_tz.stdout }}
-      LCINFRA_LETSENCRYPT={{ proxy_letsencrypt }}
-      LCINFRA_DHPARAM={{ proxy_dhparam }}
+- name: Template compose.yml
+  ansible.builtin.template:
+    src: compose.yml.j2
+    dest: "{{ proxy_project_src }}/compose.yml"
+    mode: '0644'
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
     project_src: "{{ proxy_project_src }}"
+    build: always
     state: present
 
 - name: Schedule a certbot renewal every 12 hours

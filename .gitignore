@@ -1,4 +1,4 @@
-ansible/inventory.yml
-docker/proxy/conf.d/*
-!docker/proxy/conf.d/.gitkeep
+inventory.yml
+roles/proxy/files/conf.d/**
+!roles/proxy/files/conf.d/default.conf
 .env

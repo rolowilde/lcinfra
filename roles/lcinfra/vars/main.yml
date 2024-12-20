@@ -1,0 +1,2 @@
+---
+lcinfra_docker_path: "{{ lcinfra_infra_path }}/docker"

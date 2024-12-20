@@ -1,0 +1,12 @@
+---
+- name: Ensure docker directory
+  ansible.builtin.file:
+    path: "{{ lcinfra_docker_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy docker files
+  ansible.builtin.copy:
+    src: docker/
+    dest: "{{ lcinfra_docker_path }}"
+    mode: '0644'

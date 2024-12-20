@@ -9,10 +9,9 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ${LCINFRA_LETSENCRYPT}:/etc/letsencrypt:z,ro
-      - ${LCINFRA_DHPARAM}:/etc/nginx/dhparam.pem:Z,ro
+      - {{ proxy_letsencrypt }}:/etc/letsencrypt:z,ro
+      - {{ proxy_dhparam }}:/etc/nginx/dhparam.pem:Z,ro
       - ./conf.d:/etc/nginx/conf.d:Z,ro
-      - ./locations:/etc/nginx/locations:Z,ro
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -27,8 +26,8 @@ services:
     image: certbot/certbot:latest
     command: renew
     volumes:
-      - ${LCINFRA_LETSENCRYPT}:/etc/letsencrypt:z
-      - ${LCINFRA_LETSENCRYPT}:/var/lib/letsencrypt:z
+      - {{ proxy_letsencrypt }}:/etc/letsencrypt:z
+      - {{ proxy_letsencrypt }}:/var/lib/letsencrypt:z
 
 networks:
   mirrors:

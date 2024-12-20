@@ -1,0 +1,57 @@
+---
+- name: Ensure mirror compose directory
+  ansible.builtin.file:
+    path: "{{ mirror_project_src }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure mirror root directory
+  ansible.builtin.file:
+    path: "{{ mirror_root }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy nginx.conf
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: "{{ mirror_project_src }}/nginx.conf"
+    mode: '0644'
+
+- name: Copy repo sync scripts
+  ansible.builtin.copy:
+    src: "sync-{{ mirror }}.sh"
+    dest: "{{ mirror_project_src }}/sync-{{ mirror }}.sh"
+    mode: '0644'
+  loop: "{{ mirror_list }}"
+  loop_control:
+    loop_var: mirror
+
+- name: Get host timezone
+  ansible.builtin.command:
+    cmd: timedatectl show -p Timezone --value
+  register: tdctl_tz
+  changed_when: tdctl_tz.rc != 0
+
+- name: Template compose.yml
+  ansible.builtin.template:
+    src: compose.yml.j2
+    dest: "{{ mirror_project_src }}/compose.yml"
+    mode: '0644'
+
+- name: Run docker-compose project
+  community.docker.docker_compose_v2:
+    project_src: "{{ mirror_project_src }}"
+    build: always
+    state: present
+
+- name: Schedule a sync for each mirror every random minute
+  ansible.builtin.cron:
+    name: repo sync
+    cron_file: "docker-mirror-{{ mirror }}"
+    user: root
+    minute: "{{ 60 | random }}"
+    job: docker compose --project-directory {{ mirror_project_src }} exec {{ mirror }} bash /sync
+    state: present
+  loop: "{{ mirror_list }}"
+  loop_control:
+    loop_var: mirror
