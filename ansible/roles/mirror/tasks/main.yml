@@ -11,13 +11,18 @@
   register: tdctl_tz
   changed_when: tdctl_tz.rc != 0
 
+- name: Create .env file
+  ansible.builtin.copy:
+    dest: "{{ mirror_project_src }}/.env"
+    mode: '0400'
+    content: |
+      TZ={{ tdctl_tz.stdout }}
+      LCINFRA_MIRROR_ROOT={{ mirror_root }}
+
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
     project_src: "{{ mirror_project_src }}"
     state: present
-  environment:
-    LCINFRA_MIRROR_ROOT: "{{ mirror_root }}"
-    LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
 
 - name: Find all mirror directories
   ansible.builtin.find:

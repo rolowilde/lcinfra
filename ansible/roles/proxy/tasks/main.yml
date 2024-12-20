@@ -9,14 +9,19 @@
   register: tdctl_tz
   changed_when: tdctl_tz.rc != 0
 
+- name: Create .env file
+  ansible.builtin.copy:
+    dest: "{{ proxy_project_src }}/.env"
+    mode: '0400'
+    content: |
+      TZ={{ tdctl_tz.stdout }}
+      LCINFRA_LETSENCRYPT={{ proxy_letsencrypt }}
+      LCINFRA_DHPARAM={{ proxy_dhparam }}
+
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
     project_src: "{{ proxy_project_src }}"
     state: present
-  environment:
-    LCINFRA_TIMEZONE: "{{ tdctl_tz.stdout }}"
-    LCINFRA_LETSENCRYPT: "{{ proxy_letsencrypt }}"
-    LCINFRA_DHPARAM: "{{ proxy_dhparam }}"
 
 - name: Schedule a certbot renewal every 12 hours
   ansible.builtin.cron:

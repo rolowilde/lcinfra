@@ -8,8 +8,6 @@ services:
     hostname: root.mirror
     volumes:
       - ${LCINFRA_MIRROR_ROOT}:/mirror:z,ro
-    environment:
-      - TZ=${LCINFRA_TIMEZONE}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -28,8 +26,6 @@ services:
     volumes:
       - ${LCINFRA_MIRROR_ROOT}/archlinux:/mirror:Z
       - ./archlinux/sync:/sync:Z,ro
-    environment:
-      - TZ=${LCINFRA_TIMEZONE}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
