@@ -30,8 +30,8 @@
     user: root
     hour: '*/12'
     job: >-
-      docker compose -p proxy run --rm certbot &&
-      docker compose -p proxy exec web nginx -s reload
+      docker compose --project-directory {{ proxy_project_src }} run --rm certbot &&
+      docker compose --project-directory {{ proxy_project_src }} exec web nginx -s reload
     state: present
 
 - name: Enable http and https service in default zone
