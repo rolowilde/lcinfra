@@ -48,7 +48,7 @@
 - name: Schedule a certbot renewal every 12 hours
   ansible.builtin.cron:
     name: certbot renewal
-    cron_file: docker-proxy-certbot
+    cron_file: lcinfra-proxy-certbot
     user: root
     hour: '*/12'
     job: >-
