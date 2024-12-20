@@ -28,3 +28,11 @@
       docker compose -p proxy run --rm certbot &&
       docker compose -p proxy exec web nginx -s reload
     state: present
+
+- name: Enable http and https service in default zone
+  ansible.builtin.include_role:
+    name: linux-system-roles.firewall
+  vars:
+    firewall:
+      - service: [http, https]
+        state: enabled

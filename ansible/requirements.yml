@@ -9,3 +9,4 @@ roles:
   - name: geerlingguy.git
   - name: robertdebock.cron
   - name: artis3n.tailscale
+  - name: linux-system-roles.firewall
