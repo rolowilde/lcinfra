@@ -1,4 +1,3 @@
 ---
-proxy_project_src: "{{ lcinfra_docker_path }}/proxy"
 proxy_letsencrypt: /var/lib/letsencrypt
 proxy_dhparam: /etc/ssl/certs/dhparam.pem
