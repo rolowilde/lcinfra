@@ -18,11 +18,15 @@
     directory_mode: '0755'
     mode: '0644'
 
-- name: Template compose.yml
+- name: Template files
   ansible.builtin.template:
-    src: compose.yml.j2
-    dest: "{{ mirror_project_src }}/compose.yml"
+    src: "{{ file }}"
+    dest: "{{ mirror_project_src }}/{{ file | basename | regex_replace('\\.j2$', '') }}"
     mode: '0644'
+  with_fileglob:
+    - ../templates/*.j2
+  loop_control:
+    loop_var: file
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:

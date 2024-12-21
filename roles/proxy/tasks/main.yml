@@ -12,15 +12,19 @@
     directory_mode: '0755'
     mode: '0644'
 
+- name: Template files
+  ansible.builtin.template:
+    src: "{{ file }}"
+    dest: "{{ proxy_project_src }}/{{ file | basename | regex_replace('\\.j2$', '') }}"
+    mode: '0644'
+  with_fileglob:
+    - ../templates/*.j2
+  loop_control:
+    loop_var: file
+
 - name: Generate Diffie-Hellman parameters with the default size (4096 bits)
   community.crypto.openssl_dhparam:
     path: "{{ proxy_dhparam }}"
-
-- name: Template compose.yml
-  ansible.builtin.template:
-    src: compose.yml.j2
-    dest: "{{ proxy_project_src }}/compose.yml"
-    mode: '0644'
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
