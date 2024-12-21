@@ -1,3 +1,7 @@
 ---
 mirror_root: /var/mirror
 mirror_list: [archlinux]
+
+# proto and trailing slash already in the template
+mirror_archlinux_source_url: mirror.accum.se/mirror/archlinux
+mirror_archlinux_rsync_opts:
