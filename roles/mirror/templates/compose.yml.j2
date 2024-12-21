@@ -9,7 +9,7 @@ services:
     volumes:
       - {{ mirror_root }}:/mirror:z,ro
     environment:
-      - TZ={{ tdctl_tz.stdout }}
+      - TZ={{ lcinfra_timezone }}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -30,7 +30,7 @@ services:
       - {{ mirror_root }}/{{ mirror }}:/mirror:Z
       - ./sync-{{ mirror }}.sh:/sync:Z,ro
     environment:
-      - TZ={{ tdctl_tz.stdout }}
+      - TZ={{ lcinfra_timezone }}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s

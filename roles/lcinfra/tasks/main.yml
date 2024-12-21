@@ -10,3 +10,13 @@
     src: docker/
     dest: "{{ lcinfra_docker_path }}"
     mode: '0644'
+
+- name: Get host timezone
+  ansible.builtin.command:
+    cmd: timedatectl show -p Timezone --value
+  register: tdctl_tz
+  changed_when: tdctl_tz.rc != 0
+
+- name: Set timezone fact
+  ansible.builtin.set_fact:
+    lcinfra_timezone: "{{ tdctl_tz.stdout }}"

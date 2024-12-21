@@ -12,6 +12,8 @@ services:
       - {{ proxy_letsencrypt }}:/etc/letsencrypt:z,ro
       - {{ proxy_dhparam }}:/etc/nginx/dhparam.pem:Z,ro
       - ./conf.d:/etc/nginx/conf.d:Z,ro
+    environment:
+      - TZ={{ lcinfra_timezone }}
     healthcheck:
       test: ["CMD", "curl", "-sSf", "http://localhost/"]
       interval: 30s
@@ -28,6 +30,8 @@ services:
     volumes:
       - {{ proxy_letsencrypt }}:/etc/letsencrypt:z
       - {{ proxy_letsencrypt }}:/var/lib/letsencrypt:z
+    environment:
+      - TZ={{ lcinfra_timezone }}
 
 networks:
   mirrors:
