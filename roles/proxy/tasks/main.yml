@@ -39,6 +39,7 @@
     name: certbot renewal
     cron_file: lcinfra-proxy-certbot
     user: root
+    minute: "{{ 60 | random }}"
     hour: '*/12'
     job: >-
       docker compose --project-directory {{ proxy_project_src }} run --rm certbot &&
