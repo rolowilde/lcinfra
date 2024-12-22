@@ -30,6 +30,7 @@
   community.docker.docker_compose_v2:
     project_src: "{{ proxy_project_src }}"
     build: always
+    recreate: always
     state: present
 
 - name: Schedule a certbot renewal every 12 hours

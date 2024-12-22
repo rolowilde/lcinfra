@@ -32,6 +32,7 @@
   community.docker.docker_compose_v2:
     project_src: "{{ mirror_project_src }}"
     build: always
+    recreate: always
     state: present
 
 - name: Schedule a sync for each mirror every random minute
