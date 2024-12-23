@@ -40,9 +40,11 @@
     name: "{{ mirror }} repo sync"
     cron_file: lcinfra-mirror-sync
     user: root
-    minute: "{{ vars['mirror_' + mirror + '_schedule']['minute'] | default(range(0, 60) | random) }}"
-    hour: "{{ vars['mirror_' + mirror + '_schedule']['hour'] | default(range(0, 24) | random) }}"
-    job: docker compose --project-directory {{ mirror_project_src }} exec {{ mirror }} bash /sync
+    minute: "{{ vars['mirror_' + mirror]['schedule']['minute'] | default(range(0, 60) | random) }}"
+    hour: "{{ vars['mirror_' + mirror]['schedule']['hour'] | default(range(0, 24) | random) }}"
+    job: >-
+      docker compose --project-directory {{ mirror_project_src }} exec {{ mirror }}
+      {{ vars['mirror_' + mirror]['exec'] | default('bash /syncrepo.sh') }}
     state: present
   loop: "{{ mirror_list }}"
   loop_control:

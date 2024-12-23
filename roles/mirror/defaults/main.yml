@@ -2,11 +2,12 @@
 mirror_root: /var/mirror
 mirror_list: [archlinux]
 
-# every 17th minute
-mirror_archlinux_schedule:
-  minute: '*/17'
-  hour: '*'
-
-# proto and trailing slash already in the template
-mirror_archlinux_source_url: mirror.accum.se/mirror/archlinux
-mirror_archlinux_rsync_opts:
+mirror_archlinux:
+  config:
+    # proto and trailing slash already in the template
+    source_url: mirror.accum.se/mirror/archlinux
+    rsync_opts: # excludes, etc..
+  schedule:
+    # twice an hour
+    minute: '*/33'
+    hour: '*'
