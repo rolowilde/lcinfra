@@ -35,7 +35,7 @@
     recreate: always
     state: present
 
-- name: Schedule a sync for each mirror every random minute
+- name: Schedule a sync for each mirror
   ansible.builtin.cron:
     name: "{{ mirror }} repo sync"
     cron_file: lcinfra-mirror-sync
