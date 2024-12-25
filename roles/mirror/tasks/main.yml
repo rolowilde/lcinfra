@@ -38,7 +38,7 @@
 - name: Schedule a sync for each mirror
   ansible.builtin.cron:
     name: "{{ mirror }} repo sync"
-    cron_file: lcinfra-mirror-sync
+    cron_file: lcinfra
     user: root
     minute: "{{ vars['mirror_' + mirror]['schedule']['minute'] | default(range(0, 60) | random) }}"
     hour: "{{ vars['mirror_' + mirror]['schedule']['hour'] | default(range(0, 24) | random) }}"

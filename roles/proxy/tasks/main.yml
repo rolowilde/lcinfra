@@ -35,8 +35,8 @@
 
 - name: Schedule a certbot renewal every 12 hours
   ansible.builtin.cron:
-    name: certbot renewal
-    cron_file: lcinfra-proxy-certbot
+    name: proxy certbot renewal
+    cron_file: lcinfra
     user: root
     minute: "{{ 60 | random }}"
     hour: '*/12'
