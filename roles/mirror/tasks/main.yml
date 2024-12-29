@@ -4,12 +4,14 @@
     path: "{{ mirror_project_src }}"
     state: directory
     mode: '0755'
+  tags: docker
 
 - name: Ensure mirror root directory
   ansible.builtin.file:
     path: "{{ mirror_root }}"
     state: directory
     mode: '0755'
+  tags: docker
 
 - name: Copy files
   ansible.builtin.copy:
@@ -17,6 +19,7 @@
     dest: "{{ mirror_project_src }}"
     directory_mode: '0755'
     mode: '0644'
+  tags: docker
 
 - name: Template files
   ansible.builtin.template:
@@ -27,6 +30,7 @@
     - ../templates/*.j2
   loop_control:
     loop_var: file
+  tags: docker
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
@@ -34,6 +38,7 @@
     build: always
     recreate: always
     state: present
+  tags: docker
 
 - name: Schedule a sync for each mirror
   ansible.builtin.cron:
@@ -49,3 +54,4 @@
   loop: "{{ mirror_list }}"
   loop_control:
     loop_var: mirror
+  tags: cron

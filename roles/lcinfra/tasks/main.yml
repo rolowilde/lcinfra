@@ -4,19 +4,23 @@
     path: "{{ lcinfra_docker_path }}"
     state: directory
     mode: '0755'
+  tags: docker
 
 - name: Copy docker files
   ansible.builtin.copy:
     src: docker/
     dest: "{{ lcinfra_docker_path }}"
     mode: '0644'
+  tags: docker
 
 - name: Get host timezone
   ansible.builtin.command:
     cmd: timedatectl show -p Timezone --value
   register: tdctl_tz
   changed_when: tdctl_tz.rc != 0
+  tags: docker
 
 - name: Set timezone fact
   ansible.builtin.set_fact:
     lcinfra_timezone: "{{ tdctl_tz.stdout }}"
+  tags: docker
