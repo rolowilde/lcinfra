@@ -4,7 +4,6 @@
     path: "{{ proxy_project_src }}"
     state: directory
     mode: '0755'
-  tags: docker
 
 - name: Copy files
   ansible.builtin.copy:
@@ -12,7 +11,6 @@
     dest: "{{ proxy_project_src }}"
     directory_mode: '0755'
     mode: '0644'
-  tags: docker
 
 - name: Template files
   ansible.builtin.template:
@@ -23,12 +21,10 @@
     - ../templates/*.j2
   loop_control:
     loop_var: file
-  tags: docker
 
 - name: Generate Diffie-Hellman parameters with the default size (4096 bits)
   community.crypto.openssl_dhparam:
     path: "{{ proxy_dhparam }}"
-  tags: docker
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
@@ -36,7 +32,6 @@
     build: always
     recreate: always
     state: present
-  tags: docker
 
 - name: Schedule a certbot renewal every 12 hours
   ansible.builtin.cron:
@@ -49,4 +44,3 @@
       docker compose --project-directory {{ proxy_project_src }} run --rm certbot &&
       docker compose --project-directory {{ proxy_project_src }} exec web nginx -s reload
     state: present
-  tags: cron
