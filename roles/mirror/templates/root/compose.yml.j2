@@ -1,0 +1,21 @@
+services:
+  caddy:
+    image: caddy:2.9.1
+    hostname: root.mirror
+    volumes:
+      - {{ mirror_root }}:/mirror:z,ro
+      - ../Caddyfile:/etc/caddy/Caddyfile:z,ro
+    environment:
+      - TZ={{ lcinfra_timezone }}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+networks:
+  default:
+    name: mirror_backend_net
+    driver: bridge

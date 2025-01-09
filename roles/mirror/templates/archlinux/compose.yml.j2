@@ -1,0 +1,32 @@
+services:
+  caddy:
+    image: caddy:2.9.1
+    hostname: archlinux.mirror
+    volumes:
+      - {{ mirror_root }}/archlinux:/mirror:z,ro
+      - ../Caddyfile:/etc/caddy/Caddyfile:z,ro
+    environment:
+      - TZ={{ lcinfra_timezone }}
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  rsync:
+    image: eeacms/rsync:2.6
+    command: client
+    volumes:
+      - {{ mirror_root }}/archlinux:/mirror:z
+      - ./syncrepo.sh:/syncrepo.sh:Z,ro
+    environment:
+      - TZ={{ lcinfra_timezone }}
+      - CRON_TASK_1={{ mirror_archlinux.schedule }} sh /syncrepo.sh
+    restart: unless-stopped
+
+networks:
+  default:
+    name: mirror_backend_net
+    driver: bridge

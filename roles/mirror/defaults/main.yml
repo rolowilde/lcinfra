@@ -1,13 +1,10 @@
 ---
 mirror_root: /var/mirror
-mirror_list: [archlinux]
+mirror_list: [root, archlinux]
 
 mirror_archlinux:
   config:
     # proto and trailing slash already in the template
     source_url: mirror.accum.se/mirror/archlinux
     rsync_opts: # excludes, etc..
-  schedule:
-    # twice an hour
-    minute: '*/33'
-    hour: '*'
+  schedule: '*/33 * * * *'

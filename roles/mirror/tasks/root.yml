@@ -1,0 +1,27 @@
+---
+- name: Set compose dir fact
+  ansible.builtin.set_fact:
+    mirror_root_compose_dir: "{{ mirror_project_src }}/root"
+  tags: docker
+
+- name: Ensure compose directory
+  ansible.builtin.file:
+    path: "{{ mirror_root_compose_dir }}"
+    state: directory
+    mode: '0755'
+  tags: docker
+
+- name: Template compose file
+  ansible.builtin.template:
+    src: ./root/compose.yml.j2
+    dest: "{{ mirror_root_compose_dir }}/compose.yml"
+    mode: '0644'
+  tags: docker
+
+- name: Run root mirror compose project
+  community.docker.docker_compose_v2:
+    project_src: "{{ mirror_root_compose_dir }}"
+    build: always
+    recreate: always
+    state: present
+  tags: docker

@@ -13,45 +13,18 @@
     mode: '0755'
   tags: docker
 
-- name: Copy files
+- name: Copy Caddyfile
   ansible.builtin.copy:
-    src: ./
+    src: Caddyfile
     dest: "{{ mirror_project_src }}"
     directory_mode: '0755'
     mode: '0644'
   tags: docker
 
-- name: Template files
-  ansible.builtin.template:
-    src: "{{ file }}"
-    dest: "{{ mirror_project_src }}/{{ file | basename | regex_replace('\\.j2$', '') }}"
-    mode: '0644'
-  with_fileglob:
-    - ../templates/*.j2
-  loop_control:
-    loop_var: file
-  tags: docker
-
-- name: Run docker-compose project
-  community.docker.docker_compose_v2:
-    project_src: "{{ mirror_project_src }}"
-    build: always
-    recreate: always
-    state: present
-  tags: docker
-
-- name: Schedule a sync for each mirror
-  ansible.builtin.cron:
-    name: "{{ mirror }} repo sync"
-    cron_file: lcinfra
-    user: root
-    minute: "{{ vars['mirror_' + mirror]['schedule']['minute'] | default(range(0, 60) | random) }}"
-    hour: "{{ vars['mirror_' + mirror]['schedule']['hour'] | default(range(0, 24) | random) }}"
-    job: >-
-      docker compose --project-directory {{ mirror_project_src }} exec {{ mirror }}
-      {{ vars['mirror_' + mirror]['exec'] | default('bash /syncrepo.sh') }}
-    state: present
+- name: Include mirror tasks
+  ansible.builtin.include_tasks:
+    file: "{{ mirror }}.yml"
   loop: "{{ mirror_list }}"
   loop_control:
     loop_var: mirror
-  tags: cron
+  tags: docker
