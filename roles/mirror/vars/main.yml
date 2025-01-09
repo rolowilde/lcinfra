@@ -1,2 +1,2 @@
 ---
-mirror_project_src: "{{ lcinfra_docker_path }}/mirror"
+mirror_project_src: "{{ lcinfra_infra_path }}/mirror"
