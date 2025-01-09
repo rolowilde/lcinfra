@@ -8,7 +8,7 @@ services:
     environment:
       - TZ={{ lcinfra_timezone }}
     healthcheck:
-      test: ["CMD", "curl", "-sSf", "http://localhost/"]
+      test: ["CMD-SHELL", "wget -nv -t1 --spider http://localhost/ || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
