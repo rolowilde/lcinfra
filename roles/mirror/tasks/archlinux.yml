@@ -26,4 +26,5 @@
     project_src: "{{ mirror_archlinux_compose_dir }}"
     build: always
     recreate: always
+    remove_orphans: true
     state: present

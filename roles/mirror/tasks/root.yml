@@ -20,4 +20,5 @@
     project_src: "{{ mirror_root_compose_dir }}"
     build: always
     recreate: always
+    remove_orphans: true
     state: present

@@ -28,4 +28,5 @@
     project_src: "{{ proxy_project_src }}"
     build: always
     recreate: always
+    remove_orphans: true
     state: present
