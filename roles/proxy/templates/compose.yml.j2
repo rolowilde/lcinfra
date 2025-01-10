@@ -2,24 +2,26 @@ services:
   caddy:
     image: caddy:2.9.1
     ports:
-      - 80:80
-      - 443:443
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: udp
+        mode: host
     volumes:
       - ./conf:/etc/caddy:Z
       - {{ proxy_data }}:/data:Z
     environment:
       - TZ={{ lcinfra_timezone }}
-    healthcheck:
-      test: ["CMD-SHELL", "wget -nv -t1 --spider http://localhost/ || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    networks:
-      - mirrors
     restart: unless-stopped
 
 networks:
-  mirrors:
-    name: mirror_backend_net
-    external: true
+  default:
+    name: proxynet
+    driver: bridge
