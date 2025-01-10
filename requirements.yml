@@ -6,6 +6,5 @@ collections:
 
 roles:
   - name: geerlingguy.docker
-  - name: robertdebock.cron
   - name: artis3n.tailscale
   - name: linux-system-roles.firewall
