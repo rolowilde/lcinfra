@@ -5,42 +5,27 @@
     state: directory
     mode: '0755'
 
-- name: Copy files
-  ansible.builtin.copy:
-    src: ./
-    dest: "{{ proxy_project_src }}"
-    directory_mode: '0755'
-    mode: '0644'
+- name: Ensure conf directory
+  ansible.builtin.file:
+    path: "{{ proxy_project_src }}/conf"
+    state: directory
+    mode: '0755'
 
-- name: Template files
+- name: Template Caddyfile
   ansible.builtin.template:
-    src: "{{ file }}"
-    dest: "{{ proxy_project_src }}/{{ file | basename | regex_replace('\\.j2$', '') }}"
+    src: Caddyfile.j2
+    dest: "{{ proxy_project_src }}/conf/Caddyfile"
     mode: '0644'
-  with_fileglob:
-    - ../templates/*.j2
-  loop_control:
-    loop_var: file
 
-- name: Generate Diffie-Hellman parameters with the default size (4096 bits)
-  community.crypto.openssl_dhparam:
-    path: "{{ proxy_dhparam }}"
+- name: Template compose file
+  ansible.builtin.template:
+    src: compose.yml.j2
+    dest: "{{ proxy_project_src }}/compose.yml"
+    mode: '0644'
 
 - name: Run docker-compose project
   community.docker.docker_compose_v2:
     project_src: "{{ proxy_project_src }}"
     build: always
     recreate: always
-    state: present
-
-- name: Schedule a certbot renewal every 12 hours
-  ansible.builtin.cron:
-    name: proxy certbot renewal
-    cron_file: lcinfra
-    user: root
-    minute: "{{ 60 | random }}"
-    hour: '*/12'
-    job: >-
-      docker compose --project-directory {{ proxy_project_src }} run --rm certbot &&
-      docker compose --project-directory {{ proxy_project_src }} exec web nginx -s reload
     state: present

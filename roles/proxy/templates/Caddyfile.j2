@@ -1,0 +1,23 @@
+{
+    email {{ proxy_email | default("''") }}
+
+    log {
+        output stdout
+        format console
+    }
+}
+{% for domain, config in proxy_sites.items() %}
+
+{{ domain }} {
+    log
+{% if config is string %}
+    reverse_proxy {{ config }}
+{% elif config is iterable %}
+{% for location in config %}
+    handle_path {{ location.from }} {
+        reverse_proxy {{ location.to }}
+    }
+{% endfor %}
+{% endif %}
+}
+{% endfor %}

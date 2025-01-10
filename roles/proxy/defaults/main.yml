@@ -1,3 +1,2 @@
 ---
-proxy_letsencrypt: /var/lib/letsencrypt
-proxy_dhparam: /etc/ssl/certs/dhparam.pem
+proxy_data: /var/lib/caddy/data

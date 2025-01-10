@@ -1,6 +1,3 @@
 {
-    "ansible.python.interpreterPath": "/usr/bin/python3",
-    "files.associations": {
-        "**/roles/proxy/files/conf.d/**/*": "nginx"
-    }
+    "ansible.python.interpreterPath": "/usr/bin/python3"
 }

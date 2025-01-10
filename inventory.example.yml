@@ -3,8 +3,17 @@ lc:
   hosts:
     host:
   vars:
+    proxy_data: # path where caddy data dir is created
+    proxy_email: # email address for acme
+    proxy_sites: # caddy reverse proxy
+      example.com: http://backend
+      mirror.example.com: # handle multiple locations on the same domain
+        - from: /
+          to: http://root.mirror
+
+        - from: /archlinux/*
+          to: http://archlinux.mirror
+
     mirror_root: # path to root directory of mirrors
-    proxy_letsencrypt: # path to letsencrypt directory
-    proxy_dhparam: # path to dhparams file
     tailscale_authkey: # authkey for all hosts in this group
     firewall: # https://github.com/linux-system-roles/firewall#examples-of-options

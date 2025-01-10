@@ -1,4 +1,2 @@
 inventory.yml
-roles/proxy/files/conf.d/**
-!roles/proxy/files/conf.d/default.conf
 .env

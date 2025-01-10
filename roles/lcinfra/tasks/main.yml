@@ -1,15 +1,9 @@
 ---
-- name: Ensure docker directory
+- name: Ensure infra directory
   ansible.builtin.file:
-    path: "{{ lcinfra_docker_path }}"
+    path: "{{ lcinfra_infra_path }}"
     state: directory
     mode: '0755'
-
-- name: Copy docker files
-  ansible.builtin.copy:
-    src: docker/
-    dest: "{{ lcinfra_docker_path }}"
-    mode: '0644'
 
 - name: Get host timezone
   ansible.builtin.command:
