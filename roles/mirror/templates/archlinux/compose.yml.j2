@@ -18,14 +18,14 @@ services:
     restart: unless-stopped
 
   rsync:
-    image: eeacms/rsync:2.6
-    command: client
+    image: ghcr.io/rowlul/lcmirror/archlinux:alpine-3.20.5
     volumes:
-      - {{ mirror_root }}/archlinux:/mirror:z
-      - ./syncrepo.sh:/syncrepo.sh:Z,ro
+      - {{ mirror_root }}/archlinux:/data:z
     environment:
       - TZ={{ lcinfra_timezone }}
-      - CRON_TASK_1={{ mirror_archlinux.schedule }} sh /syncrepo.sh
+      - CRONTAB_SCHEDULE={{ mirror_archlinux.schedule }}
+      - SYNCREPO_SOURCE_URL={{ mirror_archlinux.config.source_url }}
+      - SYNCREPO_LASTUPDATE_URL={{ mirror_archlinux.config.lastupdate_url }}
     restart: unless-stopped
 
 networks:

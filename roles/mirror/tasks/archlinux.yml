@@ -15,12 +15,6 @@
     dest: "{{ mirror_archlinux_compose_dir }}/compose.yml"
     mode: '0644'
 
-- name: Template syncrepo script
-  ansible.builtin.template:
-    src: ./archlinux/syncrepo.sh.j2
-    dest: "{{ mirror_archlinux_compose_dir }}/syncrepo.sh"
-    mode: '0644'
-
 - name: Run archlinux mirror compose project
   community.docker.docker_compose_v2:
     project_src: "{{ mirror_archlinux_compose_dir }}"
