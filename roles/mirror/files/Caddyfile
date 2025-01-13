@@ -1,4 +1,0 @@
-:80
-
-root * /mirror
-file_server browse

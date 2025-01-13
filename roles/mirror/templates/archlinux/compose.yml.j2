@@ -2,11 +2,10 @@ name: mirror-archlinux
 
 services:
   caddy:
-    image: caddy:2.9.1
+    image: ghcr.io/rowlul/lcmirror/web:caddy-2.9.1
     hostname: archlinux.mirror
     volumes:
-      - {{ mirror_root }}/archlinux:/mirror:z,ro
-      - ../Caddyfile:/etc/caddy/Caddyfile:z,ro
+      - {{ mirror_root }}/archlinux:/data:z,ro
     environment:
       - TZ={{ lcinfra_timezone }}
     healthcheck:

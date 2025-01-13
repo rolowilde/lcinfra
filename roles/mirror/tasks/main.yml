@@ -11,13 +11,6 @@
     state: directory
     mode: '0755'
 
-- name: Copy Caddyfile
-  ansible.builtin.copy:
-    src: Caddyfile
-    dest: "{{ mirror_project_src }}"
-    directory_mode: '0755'
-    mode: '0644'
-
 - name: Include mirror tasks
   ansible.builtin.include_tasks:
     file: "{{ mirror }}.yml"
