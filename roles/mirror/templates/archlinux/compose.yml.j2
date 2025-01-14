@@ -2,7 +2,7 @@ name: mirror-archlinux
 
 services:
   caddy:
-    image: ghcr.io/rowlul/lcmirror/web:caddy-2.9.1
+    image: ghcr.io/rolowilde/lcmirror/web:caddy-2.9.1
     hostname: archlinux.mirror
     volumes:
       - {{ mirror_root }}/archlinux:/data:z,ro
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   rsync:
-    image: ghcr.io/rowlul/lcmirror/archlinux:alpine-3.20.5
+    image: ghcr.io/rolowilde/lcmirror/archlinux:alpine-3.20.5
     volumes:
       - {{ mirror_root }}/archlinux:/data:z
     environment:

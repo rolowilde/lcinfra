@@ -2,7 +2,7 @@ name: mirror-root
 
 services:
   caddy:
-    image: ghcr.io/rowlul/lcmirror/web:caddy-2.9.1
+    image: ghcr.io/rolowilde/lcmirror/web:caddy-2.9.1
     hostname: root.mirror
     volumes:
       - {{ mirror_root }}:/data:z,ro
