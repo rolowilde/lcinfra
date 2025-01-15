@@ -1,2 +1,6 @@
 inventory.yml
 .env
+venv
+.ansible/
+.vscode/
+.idea/
