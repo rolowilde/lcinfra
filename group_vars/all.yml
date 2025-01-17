@@ -4,15 +4,15 @@ podman_create_host_directories: true
 podman_prune_images: true
 # https://github.com/linux-system-roles/podman?tab=readme-ov-file#podman_quadlet_specs
 podman_quadlet_specs:
-  - name: proxy.network
+  - name: proxy
     file_src: quadlets/proxy.network
-  - name: mirror-archlinux-rsync.container
+  - name: mirror-archlinux-rsync
     template_src: quadlets/mirror/archlinux/rsync.container.j2
-  - name: mirror-archlinux-web.container
+  - name: mirror-archlinux-web
     template_src: quadlets/mirror/archlinux/web.container.j2
-  - name: mirror.container
+  - name: mirror
     template_src: quadlets/mirror/root.container.j2
-  - name: proxy.container
+  - name: proxy
     template_src: quadlets/proxy.container.j2
 
 lccr: ghcr.io/rolowilde/lcinfra
