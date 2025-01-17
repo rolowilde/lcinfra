@@ -1,4 +1,4 @@
 :80
 
-root * /data
+root * /mirror
 file_server browse
