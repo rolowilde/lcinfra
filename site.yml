@@ -6,5 +6,4 @@
     - { role: tuned, tags: tuned }
     - { role: artis3n.tailscale, tags: tailscale }
     - { role: linux-system-roles.firewall, tags: firewall }
-    - { role: proxy, tags: proxy }
-    - { role: mirror, tags: mirror }
+    - { role: linux-system-roles.podman, tags: podman }

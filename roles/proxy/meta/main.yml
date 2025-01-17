@@ -1,4 +1,0 @@
----
-dependencies:
-  - lcinfra
-  - geerlingguy.docker

@@ -1,9 +1,0 @@
----
-mirror_root: /var/mirror
-mirror_list: [root, archlinux]
-
-mirror_archlinux:
-  config:
-    source_url: rsync://mirror.accum.se/mirror/archlinux/
-    lastupdate_url: https://mirror.accum.se/mirror/archlinux/lastupdate
-  schedule: '*/33 * * * *'

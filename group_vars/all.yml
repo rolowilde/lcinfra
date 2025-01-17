@@ -1,0 +1,28 @@
+---
+# defaults to be altered per-host/group
+podman_create_host_directories: true
+podman_prune_images: true
+podman_quadlet_specs:
+  - file_src: proxy.network
+  - template_src: mirror-archlinux-rsync.container.j2
+  - template_src: mirror-archlinux-web.container.j2
+  - template_src: mirror.container.j2
+  - template_src: proxy.container.j2
+
+# TODO: merge lcmirror and this repo
+lccr: ghcr.io/rolowilde/lcmirror
+
+# TODO: roll our own image for proxy
+proxy_web_image: docker.io/caddy:2.9.1
+proxy_data_volume: /var/local/proxy
+# used for ACME account
+proxy_email: admin@example.com
+
+mirror_web_image: "{{ lccr }}/web:caddy-2.9.1"
+mirror_root_volume: /var/local/mirror
+
+mirror_archlinux_volume: "{{ mirror_root_volume }}/archlinux"
+mirror_archlinux_image: "{{ lccr }}/archlinux:alpine-3.20.5"
+mirror_archlinux_source_url: rsync://mirror.accum.se/mirror/archlinux/
+mirror_archlinux_lastupdate_url: https://mirror.accum.se/mirror/archlinux/lastupdate
+mirror_archlinux_schedule: '*/22 * * * *'

@@ -1,2 +1,0 @@
----
-proxy_project_src: "{{ lcinfra_infra_path }}/proxy"

@@ -1,9 +1,9 @@
 ---
 collections:
-  - name: community.docker
   - name: community.general
+  - name: containers.podman
 
 roles:
-  - name: geerlingguy.docker
   - name: artis3n.tailscale
   - name: linux-system-roles.firewall
+  - name: linux-system-roles.podman

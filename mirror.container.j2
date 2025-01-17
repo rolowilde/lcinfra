@@ -1,0 +1,15 @@
+[Container]
+ContainerName=mirror
+HostName=root.mirror
+Image={{ mirror_web_image }}
+LogDriver=journald
+Network=proxy.network
+Timezone=local
+Volume={{ mirror_root_volume }}:/data:z,ro
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target

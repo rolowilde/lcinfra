@@ -4,3 +4,7 @@ venv
 .ansible/
 .vscode/
 .idea/
+group_vars/**/*
+!group_vars/all.yml
+host_vars/**/*
+!host_vars/example.yml

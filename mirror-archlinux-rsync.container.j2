@@ -1,0 +1,16 @@
+[Container]
+ContainerName=mirror-archlinux-rsync
+Environment=CRONTAB_SCHEDULE="{{ mirror_archlinux_schedule }}"
+Environment=SYNCREPO_SOURCE_URL="{{ mirror_archlinux_source_url }}"
+Environment=SYNCREPO_LASTUPDATE_URL="{{ mirror_archlinux_lastupdate_url }}"
+Image={{ mirror_archlinux_image }}
+LogDriver=journald
+Timezone=local
+Volume={{ mirror_archlinux_volume }}:/data:z
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target
