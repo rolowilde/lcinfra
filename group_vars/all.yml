@@ -2,12 +2,18 @@
 # defaults to be altered per-host/group
 podman_create_host_directories: true
 podman_prune_images: true
+# https://github.com/linux-system-roles/podman?tab=readme-ov-file#podman_quadlet_specs
 podman_quadlet_specs:
-  - file_src: proxy.network
-  - template_src: mirror-archlinux-rsync.container.j2
-  - template_src: mirror-archlinux-web.container.j2
-  - template_src: mirror.container.j2
-  - template_src: proxy.container.j2
+  - name: proxy.network
+    file_src: quadlets/proxy.network
+  - name: mirror-archlinux-rsync.container
+    template_src: quadlets/mirror/archlinux/rsync.container.j2
+  - name: mirror-archlinux-web.container
+    template_src: quadlets/mirror/archlinux/web.container.j2
+  - name: mirror.container
+    template_src: quadlets/mirror/root.container.j2
+  - name: proxy.container
+    template_src: quadlets/proxy.container.j2
 
 # TODO: merge lcmirror and this repo
 lccr: ghcr.io/rolowilde/lcmirror
