@@ -15,11 +15,9 @@ podman_quadlet_specs:
   - name: proxy.container
     template_src: quadlets/proxy.container.j2
 
-# TODO: merge lcmirror and this repo
-lccr: ghcr.io/rolowilde/lcmirror
+lccr: ghcr.io/rolowilde/lcinfra
 
-# TODO: roll our own image for proxy
-proxy_web_image: docker.io/caddy:2.9.1
+proxy_web_image: "{{ lccr }}/proxy-dev:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy
 # used for ACME account
 proxy_email: admin@example.com
