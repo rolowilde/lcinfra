@@ -6,7 +6,7 @@ Environment=SYNCREPO_LASTUPDATE_URL="{{ mirror_archlinux_lastupdate_url }}"
 Image={{ mirror_archlinux_image }}
 LogDriver=journald
 Timezone=local
-Volume={{ mirror_archlinux_volume }}:/data:z
+Volume={{ mirror_archlinux_volume }}:/mirror:z
 
 [Service]
 Restart=always
