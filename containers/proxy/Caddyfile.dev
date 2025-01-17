@@ -1,9 +1,9 @@
-localhost {
-    handle_path /mirror {
-        reverse_proxy http://root.mirror
-    }
+:80
 
-    handle_path /mirror/archlinux/* {
-        reverse_proxy http://archlinux.mirror
-    }
+handle_path /mirror {
+    reverse_proxy http://root.mirror
+}
+
+handle_path /mirror/archlinux/* {
+    reverse_proxy http://archlinux.mirror
 }
