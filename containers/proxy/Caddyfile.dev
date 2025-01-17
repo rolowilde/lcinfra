@@ -1,6 +1,6 @@
 :80
 
-handle_path /mirror {
+handle_path /mirror/ {
     reverse_proxy http://root.mirror
 }
 
