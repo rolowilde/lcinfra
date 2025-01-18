@@ -1,3 +1,16 @@
 ---
 # should never execute
 mirror_archlinux_schedule: '0 0 29 2 1'
+
+# insecure, testing only
+# most ports must be behind a VPN
+firewall:
+  - previous: replaced
+  - port: 80/tcp
+    state: enabled
+  - port: 443/tcp
+    state: enabled
+  - port: 443/udp
+    state: enabled
+  - port: 3000/tcp
+    state: enabled
