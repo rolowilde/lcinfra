@@ -1,0 +1,3 @@
+---
+# should never execute
+mirror_archlinux_schedule: '0 0 29 2 1'
