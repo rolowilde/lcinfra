@@ -43,9 +43,8 @@ No provider other than libvirt is supported.
 
 ## Configuration
 
-Default configuration is found in `group_vars/all.yml` which you may override with host/group vars. It is advisable to set `proxy_email`
-at the bare minimum for ACME account. Dev hosts should be placed under `dev` child group of `lc` that already has configuration prepared
-for them. Default Vagrant host is automatically included in the group.
+Default configuration is found in `group_vars/all.yml` which you may override with host/group vars. Dev hosts should be placed under
+`dev` child group of `lc` that already has configuration prepared for them. Default Vagrant host is automatically included in the group.
 
 ## Containers
 

@@ -19,8 +19,6 @@ lccr: ghcr.io/rolowilde/lcinfra
 
 proxy_web_image: "{{ lccr }}/proxy-dev:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy
-# used for ACME account
-proxy_email: admin@example.com
 
 mirror_web_image: "{{ lccr }}/mirror-web:caddy-2.9.1"
 mirror_root_volume: /var/local/mirror
