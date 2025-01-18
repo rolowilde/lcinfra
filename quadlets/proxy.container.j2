@@ -6,6 +6,7 @@ HostName=proxy
 Image={{ proxy_web_image }}
 LogDriver=journald
 Network=proxy.network
+Network=metric.network
 PublishPort=80:80/tcp
 PublishPort=443:443/tcp
 PublishPort=443:443/udp

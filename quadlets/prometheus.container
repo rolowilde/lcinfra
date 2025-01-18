@@ -1,13 +1,10 @@
 [Container]
 AutoUpdate=registry
-ContainerName=mirror-archlinux-web
-HostName=archlinux.mirror
-Image={{ mirror_web_image }}
+ContainerName=prometheus
+Image={{ prometheus_image }}
 LogDriver=journald
-Network=proxy.network
 Network=metric.network
 Timezone=local
-Volume={{ mirror_archlinux_volume }}:/mirror:z,ro
 
 [Service]
 Restart=always

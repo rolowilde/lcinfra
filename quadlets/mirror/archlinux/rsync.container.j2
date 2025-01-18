@@ -7,6 +7,7 @@ Environment=SYNCREPO_SOURCE_URL="{{ mirror_archlinux_source_url }}"
 Environment=SYNCREPO_LASTUPDATE_URL="{{ mirror_archlinux_lastupdate_url }}"
 Image={{ mirror_archlinux_image }}
 LogDriver=journald
+Network=metric.network
 Timezone=local
 Volume={{ mirror_archlinux_volume }}:/mirror:z
 

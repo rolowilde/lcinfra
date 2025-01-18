@@ -6,6 +6,8 @@ podman_prune_images: true
 podman_quadlet_specs:
   - name: proxy
     file_src: quadlets/proxy.network
+  - name: metric
+    file_src: quadlets/metric.network
   - name: mirror-archlinux-rsync
     template_src: quadlets/mirror/archlinux/rsync.container.j2
   - name: mirror-archlinux-web
@@ -14,8 +16,12 @@ podman_quadlet_specs:
     template_src: quadlets/mirror/root.container.j2
   - name: proxy
     template_src: quadlets/proxy.container.j2
+  - name: prometheus
+    file_src: quadlets/prometheus.container
 
 lccr: ghcr.io/rolowilde/lcinfra
+
+prometheus_image: "{{ lccr }}/prometheus:3.1.0"
 
 proxy_web_image: "{{ lccr }}/proxy-dev:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy
