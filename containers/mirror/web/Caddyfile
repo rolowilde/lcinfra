@@ -1,3 +1,9 @@
+{
+    servers {
+        metrics
+    }
+}
+
 :80
 
 root * /mirror
