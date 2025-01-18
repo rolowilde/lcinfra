@@ -29,16 +29,23 @@ ansible-playbook site.yml
 
 Tested on AlmaLinux 9.
 
+### Vagrant
+
+Testing in a local development environment can be done in Vagrant. This will spin up a libvirt/QEMU virtual machine and provision it
+with Ansible:
+
+```shell
+vagrant plugin install vagrant-libvirt
+vagrant up --provider libvirt --provision
+```
+
+No provider other than libvirt is supported.
+
 ## Configuration
 
-### group_vars/all.yml
-
-Global defaults to be overriden through host and/or group vars. All quadlet specs from `quadlets/` are included which may not be
-desirable to you. At the bare minimum, `proxy_email` should be changed for ACME account.
-
-### host_vars/example.yml
-
-Vars you most likely would like to set per-host, like Tailscale authkey and firewall definitions.
+Default configuration is found in `group_vars/all.yml` which you may override with host/group vars. It is advisable to set `proxy_email`
+at the bare minimum for ACME account. Dev hosts should be placed under `dev` child group of `lc` that already has configuration prepared
+for them. Default Vagrant host is automatically included in the group.
 
 ## Containers
 
