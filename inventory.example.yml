@@ -1,4 +1,10 @@
 ---
-lc:
-  hosts:
-    example:
+all:
+  children:
+    lc:
+      children:
+        dev:
+          hosts:
+        prod:
+          hosts:
+            example:
