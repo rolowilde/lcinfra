@@ -9,10 +9,16 @@ Vagrant.configure("2") do |config|
     libvirt.memory = 4096
     libvirt.cpus = 4
     libvirt.cputopology :sockets => '1', :cores => '2', :threads => '2'
-    libvirt.graphics_type = none
+    libvirt.graphics_type = "none"
   end
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
+    ansible.groups = {
+      "all:children" => ["lc"],
+      "lc:children" => ["dev"],
+      "dev" => ["default"]
+    }
+    ansible.skip_tags = ["tailscale"]
   end
 end
