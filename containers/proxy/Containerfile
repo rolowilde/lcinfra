@@ -1,5 +1,3 @@
 FROM caddy:2.9.1
 
-ARG ENV=dev
-
-COPY Caddyfile.${ENV} /etc/caddy/Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
