@@ -10,5 +10,3 @@ group_vars/**/*
 !group_vars/dev.yml
 host_vars/**/*
 !host_vars/example.yml
-containers/proxy/Caddyfile*
-!containers/proxy/Caddyfile.dev
