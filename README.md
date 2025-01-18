@@ -15,10 +15,15 @@ otherwise specified.
 
 ## Usage
 
-In a Python virtual environment, install pip requirements (`pip install -r requirements.txt`) and Ansible Galaxy requirements
-(`ansible-galaxy install -r requirements.yml`). Create an inventory and set host/group vars according to your needs. Run playbook:
+Create a virtual environment, install requirements, edit inventory, and run playbook:
 
 ```shell
+python -m venv venv
+source ./venv/bin/activate
+pip install -r requirements.txt
+ansible-galaxy install -r requirements.yml
+cp inventory.example.yml inventory.yml
+$EDITOR inventory.yml
 ansible-playbook site.yml
 ```
 
@@ -39,7 +44,7 @@ Vars you most likely would like to set per-host, like Tailscale authkey and fire
 
 Containers should have their configuration defined in the image during build (not bind mounted). If possible, environment variables
 are passed to the container per host via Jinja templating. Some images may have support for development or production environments,
-with the latter always omitted from public git repoistory.
+with the latter always omitted from public git repository.
 
 Internal `web` containers are served to the public Internet by the central `proxy` container over the `proxy` bridged network.
 
