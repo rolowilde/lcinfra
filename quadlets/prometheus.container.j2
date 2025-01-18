@@ -1,11 +1,13 @@
 [Container]
 AutoUpdate=registry
 ContainerName=prometheus
+Group=0
 HostName=prometheus
 Image={{ prometheus_image }}
 LogDriver=journald
 Network=metric.network
 Timezone=local
+User=0
 Volume={{ prometheus_data_volume }}:/prometheus:Z
 
 [Service]
