@@ -1,9 +1,10 @@
 inventory.yml
 .env
-venv
+venv/
 .ansible/
 .vscode/
 .idea/
+.vagrant/
 group_vars/**/*
 !group_vars/all.yml
 host_vars/**/*
