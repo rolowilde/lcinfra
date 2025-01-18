@@ -5,6 +5,7 @@ HostName=root.mirror
 Image={{ mirror_image }}
 LogDriver=journald
 Network=proxy.network
+Network=metric.network
 Timezone=local
 Volume={{ mirror_root_volume }}:/mirror:z,ro
 
