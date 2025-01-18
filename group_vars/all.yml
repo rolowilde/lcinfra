@@ -17,7 +17,7 @@ podman_quadlet_specs:
   - name: proxy
     template_src: quadlets/proxy.container.j2
   - name: prometheus
-    file_src: quadlets/prometheus.container
+    template_src: quadlets/prometheus.container.j2
 
 lccr: ghcr.io/rolowilde/lcinfra
 
