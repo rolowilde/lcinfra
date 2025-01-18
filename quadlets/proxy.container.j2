@@ -2,6 +2,7 @@
 AutoUpdate=registry
 ContainerName=proxy
 Environment=CADDY_EMAIL="{{ proxy_email }}"
+HostName=proxy
 Image={{ proxy_web_image }}
 LogDriver=journald
 Network=proxy.network
