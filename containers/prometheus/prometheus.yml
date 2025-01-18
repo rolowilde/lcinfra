@@ -1,20 +1,5 @@
 scrape_configs:
-  - job_name: archlinux.mirror
-    static_configs:
-      - targets:
-          - archlinux.mirror:2019
-
   - job_name: archlinux.rsync
     static_configs:
       - targets:
           - archlinux.rsync:9746
-
-  - job_name: root.mirror
-    static_configs:
-      - targets:
-          - root.mirror:2019
-
-  - job_name: proxy
-    static_configs:
-      - targets:
-          - proxy:2019

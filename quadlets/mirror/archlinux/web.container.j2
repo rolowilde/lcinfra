@@ -5,7 +5,6 @@ HostName=archlinux.mirror
 Image={{ mirror_image }}
 LogDriver=journald
 Network=proxy.network
-Network=metric.network
 Timezone=local
 Volume={{ mirror_archlinux_volume }}:/mirror:z,ro
 
