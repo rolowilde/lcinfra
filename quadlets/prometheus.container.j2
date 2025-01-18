@@ -6,6 +6,7 @@ Image={{ prometheus_image }}
 LogDriver=journald
 Network=metric.network
 Timezone=local
+Volume={{ prometheus_volume_data }}:/prometheus
 
 [Service]
 Restart=always

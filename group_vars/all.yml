@@ -22,6 +22,7 @@ podman_quadlet_specs:
 lccr: ghcr.io/rolowilde/lcinfra
 
 prometheus_image: "{{ lccr }}/prometheus:3.1.0"
+prometheus_data_volume: /var/local/prometheus
 
 proxy_image: "{{ lccr }}/proxy:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy
