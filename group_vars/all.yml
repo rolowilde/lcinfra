@@ -18,11 +18,16 @@ podman_quadlet_specs:
     template_src: quadlets/proxy.container.j2
   - name: prometheus
     template_src: quadlets/prometheus.container.j2
+  - name: grafana
+    template_src: quadlets/grafana.container.j2
 
 lccr: ghcr.io/rolowilde/lcinfra
 
 prometheus_image: "{{ lccr }}/prometheus:3.1.0"
 prometheus_data_volume: /var/local/prometheus
+
+grafana_image: docker.io/grafana/grafana:11.4.0
+grafana_data_volume: /var/local/grafana
 
 proxy_image: "{{ lccr }}/proxy:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy

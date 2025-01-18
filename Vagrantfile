@@ -5,6 +5,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "almalinux/9"
   config.vm.box_version = "9.5.20241203"
 
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
   config.vm.provider :libvirt do |libvirt|
     libvirt.memory = 4096
     libvirt.cpus = 4
@@ -13,6 +15,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
+    ansible.compatibility_mode = "2.0"
     ansible.playbook = "site.yml"
     ansible.groups = {
       "all:children" => ["lc"],
