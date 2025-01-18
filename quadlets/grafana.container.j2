@@ -1,11 +1,13 @@
 [Container]
 AutoUpdate=registry
 ContainerName=grafana
+Group=0
 Image={{ grafana_image }}
 LogDriver=journald
 Network=metric.network
 PublishPort=3000:3000
 Timezone=local
+User=0
 Volume={{ grafana_data_volume }}:/var/lib/grafana:Z
 
 [Service]
