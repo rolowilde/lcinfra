@@ -8,9 +8,15 @@ The configuring and orchestrating stack consists of Ansible and Podman. Podman i
 runs containers as systemd services (quadlets). Images are provided in the same repository and are production-ready unless
 otherwise specified.
 
+## Services
+
+- Reverse proxy, static file servers (Caddy)
+- Repository mirroring
+
 ## Usage
 
-In a Python virtual environment, install pip requirements (`pip install -r requirements.txt`) and Ansible Galaxy requirements (`ansible-galaxy install -r requirements.yml`). Create an inventory and set host/group vars according to your needs. Run playbook:
+In a Python virtual environment, install pip requirements (`pip install -r requirements.txt`) and Ansible Galaxy requirements
+(`ansible-galaxy install -r requirements.yml`). Create an inventory and set host/group vars according to your needs. Run playbook:
 
 ```shell
 ansible-playbook site.yml
@@ -28,6 +34,14 @@ desirable to you. At the bare minimum, `proxy_email` should be changed for ACME 
 ### host_vars/example.yml
 
 Vars you most likely would like to set per-host, like Tailscale authkey and firewall definitions.
+
+## Containers
+
+Containers should have their configuration defined in the image during build (not bind mounted). If possible, environment variables
+are passed to the container per host via Jinja templating. Some images may have support for development or production environments,
+with the latter always omitted from public git repoistory.
+
+Internal `web` containers are served to the public Internet by the central `proxy` container over the `proxy` bridged network.
 
 ## Rationale
 
