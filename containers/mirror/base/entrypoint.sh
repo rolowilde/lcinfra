@@ -5,4 +5,4 @@ export CRONTAB_FILE=${CRONTAB_FILE:-/crontab}
 [[ -z "$CRONTAB_JOB" ]] && echo "fatal: CRONTAB_JOB is empty" && exit 1
 
 echo "$CRONTAB_SCHEDULE $CRONTAB_JOB" > $CRONTAB_FILE
-supercronic "$@" /crontab
+supercronic -prometheus-listen-address 0.0.0.0 "$@" /crontab
