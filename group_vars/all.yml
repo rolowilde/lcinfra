@@ -23,14 +23,14 @@ lccr: ghcr.io/rolowilde/lcinfra
 
 prometheus_image: "{{ lccr }}/prometheus:3.1.0"
 
-proxy_web_image: "{{ lccr }}/proxy-dev:caddy-2.9.1"
+proxy_image: "{{ lccr }}/proxy:caddy-2.9.1"
 proxy_data_volume: /var/local/proxy
 
-mirror_web_image: "{{ lccr }}/mirror-web:caddy-2.9.1"
+mirror_image: "{{ lccr }}/mirror:caddy-2.9.1"
 mirror_root_volume: /var/local/mirror
 
+mirror_archlinux_image: "{{ lccr }}/archlinux:alpine-3.20.5"
 mirror_archlinux_volume: "{{ mirror_root_volume }}/archlinux"
-mirror_archlinux_image: "{{ lccr }}/mirror-archlinux:alpine-3.20.5"
 mirror_archlinux_source_url: rsync://mirror.accum.se/mirror/archlinux/
 mirror_archlinux_lastupdate_url: https://mirror.accum.se/mirror/archlinux/lastupdate
 mirror_archlinux_schedule: '*/22 * * * *'
