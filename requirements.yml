@@ -2,6 +2,7 @@
 collections:
   - name: community.general
   - name: containers.podman
+  - name: prometheus.prometheus
 
 roles:
   - name: artis3n.tailscale
