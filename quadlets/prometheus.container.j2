@@ -2,6 +2,8 @@
 AutoUpdate=registry
 ContainerName=prometheus
 Group=0
+HealthCmd=wget -nv -t1 --spider http://localhost:9090/metrics
+HealthOnFailure=kill
 Image={{ prometheus_image }}
 LogDriver=journald
 Network=metric.network

@@ -1,6 +1,8 @@
 [Container]
 AutoUpdate=registry
 ContainerName=mirror-archlinux-web
+HealthCmd=wget -nv -t1 --spider http://localhost/
+HealthOnFailure=kill
 Image={{ mirror_image }}
 LogDriver=journald
 Network=proxy.network

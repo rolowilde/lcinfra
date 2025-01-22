@@ -2,6 +2,8 @@
 AutoUpdate=registry
 ContainerName=grafana
 Group=0
+HealthCmd=curl -sSf http://localhost:3000/
+HealthOnFailure=kill
 Image={{ grafana_image }}
 LogDriver=journald
 Network=metric.network

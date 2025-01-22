@@ -1,6 +1,8 @@
 [Container]
 AutoUpdate=registry
 ContainerName=proxy
+HealthCmd=curl -sSf http://localhost/
+HealthOnFailure=kill
 Image={{ proxy_image }}
 LogDriver=journald
 Network=proxy.network
