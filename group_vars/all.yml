@@ -8,6 +8,10 @@ podman_quadlet_specs:
     file_src: quadlets/proxy.network
   - name: metric
     file_src: quadlets/metric.network
+  - name: prometheus
+    template_src: quadlets/prometheus.container.j2
+  - name: grafana
+    template_src: quadlets/grafana.container.j2
   - name: mirror-archlinux-rsync
     template_src: quadlets/mirror/archlinux/rsync.container.j2
   - name: mirror-archlinux-web
@@ -16,10 +20,6 @@ podman_quadlet_specs:
     template_src: quadlets/mirror/root.container.j2
   - name: proxy
     template_src: quadlets/proxy.container.j2
-  - name: prometheus
-    template_src: quadlets/prometheus.container.j2
-  - name: grafana
-    template_src: quadlets/grafana.container.j2
 
 lccr: ghcr.io/rolowilde/lcinfra
 
