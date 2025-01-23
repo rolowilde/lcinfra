@@ -5,29 +5,26 @@ that hosts various open source software repositories and advocates for its use i
 an educational purpose and is considered suitable for small deployments.
 
 The configuring and orchestrating stack consists of Ansible and Podman. Podman is managed by its respective role that
-runs containers as systemd services (quadlets). Images are provided in the same repository and are production-ready unless
-otherwise specified.
+runs containers as systemd services (quadlets).
 
 ## Services
 
-- Reverse proxy, static file servers (Caddy)
-- Repository mirroring
+- Reverse proxy, static file servers - Caddy
+- Repository mirroring - rsync & supercronic
+  - Arch Linux
 
 ## Usage
 
-Create a virtual environment, install requirements, edit inventory, and run playbook:
+Create a Python virtual environment and install requirements:
 
 ```shell
 python -m venv venv
 source ./venv/bin/activate
 pip install -r requirements.txt
 ansible-galaxy install -r requirements.yml
-cp inventory.example.yml inventory.yml
-$EDITOR inventory.yml
-ansible-playbook site.yml
 ```
 
-Tested on AlmaLinux 9.
+Further steps will depend on your deployment environment.
 
 ### Vagrant
 
@@ -41,18 +38,23 @@ vagrant up --provider libvirt --provision
 
 No provider other than libvirt is supported.
 
-## Configuration
+### Production
 
-Default configuration is found in `group_vars/all.yml` which you may override with host/group vars. Dev hosts should be placed under
-`dev` child group of `lc` that already has configuration prepared for them. Default Vagrant host is automatically included in the group.
+Clone this repository and set the origin to a private downstream; as upstream, use this repostiory.
 
-## Containers
+```shell
+git remote set-url origin <downstream.git>
+git remote add upstream https://github.com/rolowilde/lcinfra.git
+```
 
-Containers should have their configuration defined in the image during build (not bind mounted). If possible, environment variables
-are passed to the container per host via Jinja templating.
+Create an `inventory.yml` file and include hosts in the `lc` group. Override `all.yml` variables to configure roles and services.
+Run playbook:
 
-Each container is configured assuming SELinux is in enforcing mode. Some may have the same mountpoint writeable by other containers,
-some may not.
+```shell
+ansible-playbook -KJ site.yml
+```
+
+Tested on Alma Linux 9.
 
 ## Rationale
 
