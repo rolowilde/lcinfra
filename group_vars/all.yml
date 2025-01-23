@@ -6,6 +6,8 @@ podman_prune_images: true
 podman_quadlet_specs:
   - name: services
     file_src: quadlets/services.network
+  - name: blackbox-exporter
+    template_src: quadlets/blackbox-exporter.container.j2
   - name: prometheus
     template_src: quadlets/prometheus.container.j2
   - name: grafana
@@ -20,6 +22,8 @@ podman_quadlet_specs:
     template_src: quadlets/proxy.container.j2
 
 lccr: ghcr.io/rolowilde/lcinfra
+
+blackbox_image: docker.io/prom/blackbox-exporter:v0.25.0
 
 prometheus_image: "{{ lccr }}/prometheus:3.1.0"
 prometheus_data_volume: /var/local/prometheus

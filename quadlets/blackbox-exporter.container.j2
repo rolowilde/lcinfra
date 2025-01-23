@@ -1,0 +1,17 @@
+[Container]
+AutoUpdate=registry
+ContainerName=blackbox-exporter
+Group=0
+HealthCmd=wget -nv -t1 --spider http://localhost:9115/metrics
+HealthOnFailure=kill
+Image={{ blackbox_image }}
+LogDriver=journald
+Network=services.network
+Timezone=local
+User=0
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
