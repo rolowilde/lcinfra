@@ -51,8 +51,6 @@ Default configuration is found in `group_vars/all.yml` which you may override wi
 Containers should have their configuration defined in the image during build (not bind mounted). If possible, environment variables
 are passed to the container per host via Jinja templating.
 
-Internal `web` containers are served to the public Internet by the central `proxy` container over the `proxy` bridged network.
-
 Each container is configured assuming SELinux is in enforcing mode. Some may have the same mountpoint writeable by other containers,
 some may not.
 
