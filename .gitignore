@@ -5,8 +5,3 @@ venv/
 .vscode/
 .idea/
 .vagrant/
-group_vars/**/*
-!group_vars/all.yml
-!group_vars/dev.yml
-host_vars/**/*
-!host_vars/example.yml

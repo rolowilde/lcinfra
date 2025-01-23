@@ -1,9 +1,13 @@
 ---
-# should never execute
+# vagrant default machine host vars
+
+# skipped in vagrantfile
+tailscale_authkey: null
+
+# prevent syncing
 mirror_archlinux_schedule: '0 0 29 2 1'
 
-# insecure, testing only
-# most ports must be behind a VPN
+# https://github.com/linux-system-roles/firewall#examples-of-options
 firewall:
   - previous: replaced
   - port: 80/tcp

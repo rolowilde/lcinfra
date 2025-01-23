@@ -1,8 +1,0 @@
----
-# authkey to your tailnet
-# skip tailscale tag if leaving empty
-tailscale_authkey:
-
-# firewalld config definition
-# https://github.com/linux-system-roles/firewall#examples-of-options
-firewall:

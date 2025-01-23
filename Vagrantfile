@@ -19,8 +19,7 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "site.yml"
     ansible.groups = {
       "all:children" => ["lc"],
-      "lc:children" => ["dev"],
-      "dev" => ["default"]
+      "lc" => ["default"],
     }
     ansible.skip_tags = ["tailscale"]
   end
