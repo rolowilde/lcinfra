@@ -11,3 +11,9 @@ scrape_configs:
     static_configs:
       - targets:
           - rsync-archlinux:9746
+  - job_name: caddy
+    static_configs:
+      - targets:
+          - mirror-archlinux:2019
+          - mirror:2019
+          - proxy:2019

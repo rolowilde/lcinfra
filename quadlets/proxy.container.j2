@@ -1,6 +1,7 @@
 [Container]
 AutoUpdate=registry
 ContainerName=proxy
+Environment=CADDY_ADMIN=0.0.0.0:2019
 HealthCmd=curl -sSf http://localhost/
 HealthOnFailure=kill
 Image={{ proxy_image }}
