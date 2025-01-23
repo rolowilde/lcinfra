@@ -10,7 +10,7 @@ scrape_configs:
     static_configs:
       - targets:
           - host.containers.internal:9100
-  - job_name: blackbox
+  - job_name: blackbox-http
     metrics_path: /probe
     params:
       module: [http_2xx]
