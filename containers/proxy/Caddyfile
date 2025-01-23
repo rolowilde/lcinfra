@@ -5,5 +5,5 @@ handle_path /mirror/ {
 }
 
 handle_path /mirror/archlinux/* {
-    reverse_proxy http://mirror-archlinux-web
+    reverse_proxy http://mirror-archlinux
 }

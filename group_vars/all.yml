@@ -4,20 +4,18 @@ podman_create_host_directories: true
 podman_prune_images: true
 # https://github.com/linux-system-roles/podman?tab=readme-ov-file#podman_quadlet_specs
 podman_quadlet_specs:
-  - name: proxy
-    file_src: quadlets/proxy.network
-  - name: metric
-    file_src: quadlets/metric.network
+  - name: services
+    file_src: quadlets/services.network
   - name: prometheus
     template_src: quadlets/prometheus.container.j2
   - name: grafana
     template_src: quadlets/grafana.container.j2
-  - name: mirror-archlinux-rsync
-    template_src: quadlets/mirror/archlinux/rsync.container.j2
-  - name: mirror-archlinux-web
-    template_src: quadlets/mirror/archlinux/web.container.j2
+  - name: rsync-archlinux
+    template_src: quadlets/rsync-archlinux.container.j2
+  - name: mirror-archlinux
+    template_src: quadlets/mirror-archlinux.container.j2
   - name: mirror
-    template_src: quadlets/mirror/root.container.j2
+    template_src: quadlets/mirror.container.j2
   - name: proxy
     template_src: quadlets/proxy.container.j2
 

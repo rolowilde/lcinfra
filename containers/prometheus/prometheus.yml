@@ -10,4 +10,4 @@ scrape_configs:
   - job_name: supercronic
     static_configs:
       - targets:
-          - mirror-archlinux-rsync:9746
+          - rsync-archlinux:9746
